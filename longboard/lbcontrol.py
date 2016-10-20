@@ -15,6 +15,7 @@ speed = 1900
 hold = 0
 oldts  = time.time()
 
+# threads
 class perpetualTimer():
 
    def __init__(self,t,hFunction):
