@@ -15,7 +15,6 @@ speed = 1900
 hold = 0
 oldts  = time.time()
 
-# threads
 class perpetualTimer():
 
    def __init__(self,t,hFunction):
@@ -39,8 +38,8 @@ def trigger():
 	global speed
 	global hold
 	newts = time.time()
-	print(newts)
-	print(oldts)
+	#print(newts)
+	#print(oldts)
 	if ((oldts+0.1<newts) and (hold == 0)):
 		speed = speed - 5
 		if (speed<=1900):
@@ -98,28 +97,35 @@ while 1:
 			 print("Button 5")
 			#Joystick
 			if event.code==115:
-				 print("UP")
+				 #print("UP")
 			 	 print(speed)	
 				 speed = speed +1
 				 if speed >=1999:
 					speed=1999	
 				 pi.set_PWM_dutycycle(4, speed)	
 			if event.code==114:
-				 print("DOWN")
+				 #print("DOWN")
 			 	 print(speed)	
 				 speed = speed -1
 				 if speed <=1900:
 					speed=1900	
 				 pi.set_PWM_dutycycle(4, speed)	
-			if event.code==163:
-				 print("RIGHT")
+			if ((event.code==163) and ((event.value==1) or (event.value==2))):
+				 #print("RIGHT")
 				 print("Tempomat: ON")
 				 hold=1	
-			if event.code==165:
-				 print("LEFT")
+			if ((event.code==163) and (event.value==0)):
+				 #print("RIGHT")
 				 print("Tempomat: OFF")
 				 hold=0	
-		
+			if event.code==165:
+				 #print("LEFT")
+				 print("Tempomat: OFF")
+				 hold=0	
+			#print(categorize(event))
+			#print(event.value)
+			#print(event.code)
+			#print(event.type)
 
 	except (IOError, OSError):
 		print("IO Error... let's try again")
